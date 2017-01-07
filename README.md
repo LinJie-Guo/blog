@@ -13,8 +13,8 @@
 - **config** 配置目录 
 - **static** 静态资源
 - **templates** 模板目录   
-    - **home** 前台  
-    - **admin** 后台(子目录同上)   
+    - **default** 前台默认模板  
+    - **admin** 后台   
 - **templates_c** 模板缓存
 
 
