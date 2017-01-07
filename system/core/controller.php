@@ -10,6 +10,9 @@ class controller Extends medoo
         parent::__construct();
         $this->db = init::$db;
     }
-    
+
+    function __call($functionName,$args){
+        echo"Action Error!";
+    }
 }
 
