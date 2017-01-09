@@ -24,8 +24,7 @@
 3. \config\constants.php 这里定义常量
 
 # 开发进度
-core\init.php
-~~未完成 函数加载(需要吗？)、模板引擎(Smarty太大，写一个简单的)、lib加载~~
+核心框架未完成的模板有 模板引擎。
 2017-02-08   init.php中引入loader.php 用于加载librarys目录下的类
 
 # 特点
