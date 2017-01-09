@@ -4,7 +4,7 @@
  * 
  * 关于安全：不需要对参数过滤，利用Medoo合理的拼写sql可以杜绝注入。但是最后的输出一定要转义实体
  *
- * 未完成 函数加载(需要吗？)、模板引擎(Smarty太大，写一个简单的)、lib加载
+ * 未完成 lib加载(已经完成)、模板引擎(Smarty太大，写一个简单的)
  */
 
 class init {
@@ -32,11 +32,12 @@ class init {
         define('CORE_PATH', BASEPATH . 'system/core/');
 
         //载入框架核心类
-        require_once CORE_PATH . "medoo.php";
+        require_once CORE_PATH . 'medoo.php';
         require_once BASEPATH . 'config/config.php';
         self::$db = require_once BASEPATH . 'config/database.php';
         require_once BASEPATH . 'config/constants.php';
-        require_once CORE_PATH . "controller.php";
+        require_once CORE_PATH . 'controller.php';
+        require_once CORE_PATH . 'loader.php';
 
         //判断是否开启PATH_INFO
         if ($g['PATH_INFO']) {

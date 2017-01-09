@@ -9,6 +9,7 @@ class controller Extends medoo
     public function __construct() {
         parent::__construct();
         $this->db = init::$db;
+        $this->loader=new Loader();
     }
 
     function __call($functionName,$args){

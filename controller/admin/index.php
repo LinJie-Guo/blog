@@ -13,6 +13,8 @@ class index Extends controller
 
     public function index() 
     {
+        $a = $this->loader->library('view');
+        $a->test();
 
         die('adminss');
     }
