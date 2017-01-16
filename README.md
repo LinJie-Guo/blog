@@ -14,8 +14,6 @@
 - **static** 静态资源
 - **templates** 模板目录   
     - **home** 前台  
-        - **web** PC页面   
-        - **mobile** 手机端页面    
     - **admin** 后台(子目录同上)   
 - **templates_c** 模板缓存
 
