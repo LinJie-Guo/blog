@@ -1,6 +1,10 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * 博客的核心类。这里完成了自动加载、安全过滤等。
+ * 博客的核心类。这里完成了自动加载、引入全局变量(常量)、配置文件等。
+ * 
+ * 关于安全：不需要对参数过滤，利用Medoo合理的拼写sql可以杜绝注入。但是最后的输出一定要转义实体
+ *
+ * 未完成 函数加载(需要吗？)、模板引擎(Smarty太大，写一个简单的)、lib加载
  */
 
 class init {
@@ -23,10 +27,6 @@ class init {
     //定义常用路径常量
     private static function init()
     {
-
-        //确认平台，控制器和方法，index.php?c=index&a=index
-        define('CONTROLLER', !empty($_GET['c'])?$_GET['c']:'index');
-        define('ACTION', !empty($_GET['a'])?$_GET['a']:'index');
         
         //CORE路径
         define('CORE_PATH', BASEPATH . 'system/core/');
@@ -37,6 +37,18 @@ class init {
         self::$db = require_once BASEPATH . 'config/database.php';
         require_once BASEPATH . 'config/constants.php';
         require_once CORE_PATH . "controller.php";
+
+        //判断是否开启PATH_INFO
+        if ($g['PATH_INFO']) {
+            $PATH_INFO = $_SERVER['PATH_INFO'];
+            $PATH_INFO = explode('/', trim($_SERVER['PATH_INFO'], '/'));
+
+            define('CONTROLLER', !empty($PATH_INFO[0]) ? $PATH_INFO[0] : $route['default_controller']);
+            define('ACTION', !empty($PATH_INFO[1]) ? $PATH_INFO[1] : $route['default_action']);
+        } else {
+            define('CONTROLLER', !empty($_GET['c']) ? $_GET['c'] : $route['default_controller']);
+            define('ACTION', !empty($_GET['a']) ? $_GET['a'] : $route['default_action']);
+        }
     }
 
     //路由分发

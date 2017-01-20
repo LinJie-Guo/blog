@@ -17,5 +17,10 @@ class index Extends controller
 
         die('index');
     }
+    public function test() 
+    {
+        
+        die('test');
+    }
 }
 
