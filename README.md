@@ -25,7 +25,8 @@
 
 # 开发进度
 核心框架未完成的模板有 模板引擎。
-2017-02-08   init.php中引入loader.php 用于加载librarys目录下的类
+2017-02-08   init.php中引入loader.php 用于加载librarys目录下的类   
+2017-02-16   增加$this->i('参数','g=>get,p=>post,r=>request') 方法、后台模板、模板引擎(Twig)、重构一些核心代码
 
 # 特点
 >开发阶段

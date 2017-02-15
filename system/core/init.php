@@ -78,9 +78,9 @@ class init {
         //此处我们只需对控制器和模型进行自动加载
         if (file_exists(BASEPATH . 'controller/' . self::$platform  . '/' . strtolower($classname) . '.php')) {
             require_once(BASEPATH . 'controller/' . self::$platform  . '/' . strtolower($classname) . '.php');
-        } else {
+        } /*else {
             die('Controller Error!');
-        }
+        }*/
        
     }
 
