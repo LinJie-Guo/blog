@@ -19,7 +19,8 @@ class login Extends my_controller
 
         //判断是否登陆
         if ($this->i('username', 'p') == 'admin' && $this->i('password', 'p')  == '123456') {
-            echo $this->twig->render('index.html', $this->general_var);
+            echo '引入模板';die;
+            echo $this->view->render('index.html', $this->general_var);
             exit;
         } else {
             die('登陆失败，即将跳转！');

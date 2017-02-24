@@ -15,7 +15,7 @@ class controller Extends medoo
         $this->view = $this->loader->library('view', 'admin');
 
         //使用twig模板引擎
-        $this->twig = $this->view->twig;
+        // $this->twig = $this->view->twig;
 
         //执行需要初始化的数据
         $this->init();
