@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>提示信息</title>
+        <?php include ADMIN_PATH . '/includes/header.html' ?>
+    </head>
+  
+    <body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+        
+    
+        
+        <div id="main-content"> <!-- Main Content Section with everything -->
+            
+            
+            <div class="clear"></div> <!-- End .clear -->
+            
+            <div class="content-box"><!-- Start Content Box -->
+                
+                <div class="content-box-header">
+                    
+                    <h3></h3>
+                    
+                    <ul class="content-box-tabs">
+                        <!-- href must be unique and match the id of target div -->
+                    </ul>
+                    
+                    <div class="clear"></div>
+                    
+                </div> <!-- End .content-box-header -->
+                
+                <div class="content-box-content">
+                    
+                    <p><font style="font-size:12pt;<?php if($red):?>color:red;<?php endif;?>"><b><?php echo $msg;?></b></font></p>
+                    <p>
+                    <?php if($bak=='yes'):?><span id="ret_sec">3</span>秒后自动返回，如未返回请点击<?php endif;?>
+                    <?php if($url ==''):?>
+                        <a href="javascript:history.go(-1);" class="button" />返回</a>
+                    <?php else:?>
+                        <a href="<?php echo $url;?>" class="button" />返回</a>
+                    <?php endif;?>
+                    <?php if($button != ''):?>  <a href="<?php echo $button_url;?>" class="button" target="_blank"><?php echo $button;?></a><?php endif;?>
+                    </p>
+
+                </div> <!-- End .content-box-content -->
+                
+            </div> <!-- End .content-box -->
+
+            <div class="clear"></div>
+
+            
+        </div> <!-- End #main-content -->
+        
+    </div></body>
+  
+
+<!-- Download From www.exet.tk-->
+<script type="text/javascript">
+function run_ret()
+{
+    var sec =   document.getElementById('ret_sec').innerHTML;
+    var nex_sec =   sec-1;
+    if(nex_sec  ==  0)
+    {
+        <?php if($url == ''):?>
+            history.go(-1);
+        <?php else:?>
+            location.href="<?php echo $url;?>";
+        <?php endif;?>
+    }
+    if(sec  >   1)
+    {
+        document.getElementById('ret_sec').innerHTML    =   sec-1;
+        window.setTimeout(run_ret,1000);
+    }
+}
+
+<?php if($bak=='yes'):?>
+window.setTimeout(run_ret,1000);
+<?php endif;?>
+</script>
+</html>

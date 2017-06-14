@@ -42,7 +42,7 @@ layui.config({
         cached: false, 
         // data: navs
 		// cached:true,
-		url: '/api/getNavs'
+		url: '/admin/api/getNavs'
     });
     //渲染navbar
     navbar.render();

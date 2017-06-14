@@ -24,7 +24,7 @@ class index Extends controller
     }
     public function test() 
     {
-        
+        $this->view->display('test');
         die('test');
     }
 }

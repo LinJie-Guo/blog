@@ -24,8 +24,14 @@ class view
             }
         }
 
-        if (file_exists(ADMIN_PATH . 'login' . '.html')) {
-            require_once(ADMIN_PATH . 'login' . '.html');
+        $path = HOME_PATH;
+
+        if (init::$platform == 'admin') {
+            $path = ADMIN_PATH;
+        }
+
+        if (file_exists($path . $tmpFile . '.html')) {
+            require_once($path . $tmpFile . '.html');
             exit;
         } else {
             die($tmpFile . '模板不存在！');

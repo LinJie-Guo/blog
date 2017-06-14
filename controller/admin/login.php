@@ -16,21 +16,71 @@ class login Extends my_controller
         parent::__construct();
 
         //通用变量载入到模板
-        $this->general_var[''] = '';
+        $this->TKD['title'] = '管理系统';
+    }
+    
+    /**
+     * 首页
+     * @return [type] [description]
+     */
+    public function main()
+    {
+        $this->view->display('login/index');
     }
 
+    /**
+     * 登陆页
+     * @return [type] [description]
+     */
+    public function index() 
+    {
+        $this->view->assign('TKD', $this->TKD);
+        $this->view->display('login/login');
+    }
+
+    /**
+     * 登陆检查
+     * @return [type] [description]
+     */
     public function check() 
     {
-        //判断是否登陆
-        if ($this->i('username', 'p') == 'admin' && $this->i('password', 'p')  == '123456') {
-            echo '引入模板';die;
-            echo $this->view->render('index.html', $this->general_var);
-            exit;
-        } else {
-            die('登陆失败，即将跳转！');
+        $username = $this->post('username');
+        $password = $this->myEncode($this->post('password'));
+
+        $userInfo = $this->db->get('sys_user', '*', ["status"=>1, 'username'=>$username, 'password'=>$password]);
+
+        if (empty($userInfo)) {
+            $this->showMsg('账号不存在或密码错误', '/admin/login/');
         }
 
-        
+        // 登陆成功，保存session，跳转到首页
+        $_SESSION = array(
+            'username' => $userInfo['username'],
+            'name' => $userInfo['name'],
+            'uid' => $userInfo['id'],
+            'rid' => $userInfo['rid'],
+            'logged_in' => TRUE
+        );
+
+        $this->jump('/admin/login/main');
+
     }
+
+    /**
+     * 后台介绍
+     * @return [type] [description]
+     */
+    public function intro()
+    {
+        echo '欢迎回来！';
+
+    }
+
+    public function logout()
+    {
+        unset($_SESSION);
+        $this->jump('/admin/login/');
+    }
+
 }
 

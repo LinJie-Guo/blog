@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <?php include ADMIN_PATH . '/includes/header.html' ?>
+        <link rel="stylesheet" href="/public/web/css/login.css" />
+    </head>
+
+    <body class="beg-login-bg">
+        <div class="beg-login-box">
+            <header>
+                <h1>后台登录</h1>
+            </header>
+            <div class="beg-login-main">
+                <form action="/admin/login/check" class="layui-form" method="post">
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
+                        <i class="layui-icon">&#xe612;</i>
+                    </label>
+                        <input type="text" name="username"  lay-verify="required" autocomplete="off" placeholder="这里输入登录名" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
+                        <i class="layui-icon">&#xe642;</i>
+                    </label>
+                        <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="这里输入密码" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="beg-pull-left beg-login-remember">
+                            <label>记住帐号？</label>
+                            <input type="checkbox" name="rememberMe" value="true" lay-skin="switch" checked title="记住帐号">
+                        </div>
+                        <div class="beg-pull-right">
+                            <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
+                            <i class="layui-icon">&#xe650;</i> 登录
+                        </button>
+                        </div>
+                        <div class="beg-clear"></div>
+                    </div>
+                </form>
+            </div>
+            <footer>
+                <p>2017 &copy;<a href="http://www.yestae.com/">北京益友会</a></p>
+            </footer>
+        </div>
+        <script>
+            layui.use(['layer', 'form'], function() {
+            });
+        </script>
+    </body>
+
+</html>

@@ -2,7 +2,7 @@
 
 return new medoo([
     'database_type' => 'mysql',
-    'database_name' => 'tea_shop',
+    'database_name' => 'blog',
     'server' => $_SERVER['SVR_MYSQL_HOST_S'],
     'username' => $_SERVER['SVR_MYSQL_USERNAME_S'],
     'password' => $_SERVER['SVR_MYSQL_PASSWORD_S'],
