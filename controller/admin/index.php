@@ -1,8 +1,12 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * controller
+ * 
+ * @author Linjie<a0s@foxmail.com>
+ * @version 1.0
+ * @createtime 2017-6-16 15:52:00
+ * @updatetime 2017-6-16 15:52:00
  */
-
 class index Extends my_controller
 {
     
@@ -11,7 +15,7 @@ class index Extends my_controller
         parent::__construct();
 
         //通用变量载入到模板
-        $this->general_var[''] = '';
+        $this->TKD['title'] = '管理系统';
     }
 
     public function index() 
@@ -19,11 +23,13 @@ class index Extends my_controller
 
         //判断是否登陆
         if (isset($_SESSION['admin'])) {
-            echo $this->twig->render('index.html', $this->general_var);
+            echo $this->view->display('index', $this->general_var);
             exit;
         }
+        
+        $this->view->assign('TKD', $this->TKD);
 
-        echo $this->twig->render('login.html', $this->general_var);
+        $this->view->display('login');
         exit;
     }
 }

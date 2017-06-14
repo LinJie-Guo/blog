@@ -1,13 +1,17 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * 博客的核心类。这里完成了自动加载、引入全局变量(常量)、配置文件等。
- * 
  * 关于安全：不需要对参数过滤，利用Medoo合理的拼写sql可以杜绝注入。但是最后的输出一定要转义实体
- *
  * 未完成 lib加载(已经完成)、模板引擎(Smarty太大，写一个简单的)
+ * 
+ * @author Linjie<a0s@foxmail.com>
+ * @version 1.0
+ * @createtime 2017-6-16 15:52:00
+ * @updatetime 2017-6-16 15:52:00
  */
 
-class init {
+class init 
+{
     
     public function __construct() 
     {
@@ -24,7 +28,10 @@ class init {
         self::dispatch();
     }
 
-    //定义常用路径常量
+    /**
+     * 定义常用路径常量
+     * @return void
+     */
     private static function init()
     {
         
@@ -44,31 +51,54 @@ class init {
             $PATH_INFO = $_SERVER['PATH_INFO'];
             $PATH_INFO = explode('/', trim($_SERVER['PATH_INFO'], '/'));
 
-            define('CONTROLLER', !empty($PATH_INFO[0]) ? $PATH_INFO[0] : $route['default_controller']);
-            define('ACTION', !empty($PATH_INFO[1]) ? $PATH_INFO[1] : $route['default_action']);
+            if (self::$platform == 'admin') {
+                define('CONTROLLER', !empty($PATH_INFO[1]) ? $PATH_INFO[1] : $route['default_controller']);
+                define('ACTION', !empty($PATH_INFO[2]) ? $PATH_INFO[2] : $route['default_action']);
+            } else {
+                define('CONTROLLER', !empty($PATH_INFO[0]) ? $PATH_INFO[0] : $route['default_controller']);
+                define('ACTION', !empty($PATH_INFO[1]) ? $PATH_INFO[1] : $route['default_action']);
+            }
         } else {
             define('CONTROLLER', !empty($_GET['c']) ? $_GET['c'] : $route['default_controller']);
             define('ACTION', !empty($_GET['a']) ? $_GET['a'] : $route['default_action']);
         }
     }
 
-    //路由分发
+    /**
+     * 路由分发
+     * @return void
+     */
     private static function dispatch()
     {
         //实例化对象，并调用方法，对象名和方法名都是变量
         $controller_name = CONTROLLER;
         $action_namt = ACTION;
+
+        if (!class_exists($controller_name)) {
+            die('Controller Error!');
+        }
+
+        if (!method_exists($controller_name, $action_namt)) {
+            die('Action Error!');
+        }
+
         $controller = new $controller_name(); //实例化对象
         $controller->$action_namt();
     }
 
-    //将load注册为自动加载
+    /**
+     * 将load注册为自动加载
+     * @return void
+     */
     private static function autoload()
     {
         spl_autoload_register(array(__CLASS__,'load'));
     }
 
-    //自动载入方法
+    /**
+     * 自动载入方法
+     * @return void
+     */
     private static function load($classname)
     {
         if (self::$platform != 'home') {
@@ -78,7 +108,7 @@ class init {
         //此处我们只需对控制器和模型进行自动加载
         if (file_exists(BASEPATH . 'controller/' . self::$platform  . '/' . strtolower($classname) . '.php')) {
             require_once(BASEPATH . 'controller/' . self::$platform  . '/' . strtolower($classname) . '.php');
-        } /*else {
+        }/* else {
             die('Controller Error!');
         }*/
        

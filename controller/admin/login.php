@@ -1,6 +1,11 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * controller
+ * @description 登陆
+ * 
+ * @author Linjie<a0s@foxmail.com>
+ * @version 1.0
+ * @createtime 2017-6-16 15:52:00
+ * @updatetime 2017-6-16 15:52:00
  */
 
 class login Extends my_controller
@@ -16,7 +21,6 @@ class login Extends my_controller
 
     public function check() 
     {
-
         //判断是否登陆
         if ($this->i('username', 'p') == 'admin' && $this->i('password', 'p')  == '123456') {
             echo '引入模板';die;

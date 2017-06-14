@@ -1,12 +1,18 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * controller 基类
+ * 
+ * @author Linjie<a0s@foxmail.com>
+ * @version 1.0
+ * @createtime 2017-6-16 15:52:00
+ * @updatetime 2017-6-16 15:52:00
  */
 
 class controller Extends medoo
 {
     
-    public function __construct() {
+    public function __construct() 
+    {
         parent::__construct();
         $this->db = init::$db;
 
@@ -28,11 +34,11 @@ class controller Extends medoo
      */
     public function init()
     {
-        $_GET = $this->check_input($_GET);
-        $_POST = $this->check_input($_POST);
-        $_COOKIE = $this->check_input($_COOKIE);
-        $_REQUEST = $this->check_input($_REQUEST);
-        $_SERVER = $this->check_input($_SERVER);
+        $_GET = $this->checkInput($_GET);
+        $_POST = $this->checkInput($_POST);
+        $_COOKIE = $this->checkInput($_COOKIE);
+        $_REQUEST = $this->checkInput($_REQUEST);
+        $_SERVER = $this->checkInput($_SERVER);
     }
 
     /**
@@ -70,9 +76,7 @@ class controller Extends medoo
             }
         }
 
-
         return $a[$action_key];
-
     }
 
     /**
@@ -81,7 +85,7 @@ class controller Extends medoo
      * @param  boolean $is_exec 是否过滤
      * @return [type]           [description]
      */
-    public function check_input($str = '', $is_exec = true)
+    public function checkInput($str = '', $is_exec = true)
     {
 
         if ($is_exec) {
@@ -89,7 +93,7 @@ class controller Extends medoo
             if (is_array($str)) {
 
                 foreach ($str as $k => $v) {
-                    $str[$k] = $this->check_input($v);
+                    $str[$k] = $this->checkInput($v);
                 }
 
             } else {
@@ -99,14 +103,7 @@ class controller Extends medoo
         }
 
         return $str;
-
     }
 
-
-
-
-    /*function __call($functionName,$args){
-        echo"Action Error!";
-    }*/
 }
 

@@ -1,9 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * 加载类库和辅助函数
+ * @description 加载类库和辅助函数
+ * 
+ * @author Linjie<a0s@foxmail.com>
+ * @version 1.0
+ * @createtime 2017-6-16 15:52:00
+ * @updatetime 2017-6-16 15:52:00
  */
-
-class loader{
+class loader
+{
 
     //加载类库
     public function library($lib_name, $parameter = '')
